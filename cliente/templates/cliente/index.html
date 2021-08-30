@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dt-buttons btn-group flwx-wrap float-left m-4">
+    <a href="{% url 'form' %}" class="btn btn-primary">
+        Cadastrar cliente
+    </a>
+</div>
+<div class="container mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.telefone }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.categoria }}</td>
+                    <td>
+                        <a href="/cliente/detalhe/{{ cliente.id }}/" class="btn btn-outline-secondary">Visualizar</a>
+                        <a href="/cliente/edit/{{ cliente.id }}/" class="btn btn-outline-primary">Editar</a>
+                        <a href="/cliente/delete/{{ cliente.id }}/" class="btn btn-outline-danger">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
