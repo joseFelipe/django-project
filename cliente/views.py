@@ -2,10 +2,14 @@ import cliente
 from django.shortcuts import redirect, render
 from .models import Cliente
 from .form import ClienteForm
+from django.core.paginator import Paginator
 
 
 def index(request):
     list_clientes = Cliente.objects.all()
+    paginator = Paginator(list_clientes, 10)
+    page = request.GET.get('page')
+    list_clientes = paginator.get_page(page)
     return render(request, 'cliente/index.html', {'clientes': list_clientes})
 
 
