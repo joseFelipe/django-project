@@ -6,7 +6,10 @@ from django.core.paginator import Paginator
 
 
 def index(request):
-    list_clientes = Cliente.objects.all()
+    # list_clientes = Cliente.objects.all()
+    list_clientes = Cliente.objects.order_by('data_criacao').filter(
+        categoria=2
+    )
     paginator = Paginator(list_clientes, 10)
     page = request.GET.get('page')
     list_clientes = paginator.get_page(page)
